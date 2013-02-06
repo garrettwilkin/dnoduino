@@ -29,7 +29,7 @@ var server = net.createServer(function(c) { //'connection' listener
   c.on('end', function() {
     console.log('server disconnected');
   });
-  c.write('hello\r\n');
+  c.write('led3');
   c.pipe(c);
 });
 server.listen(8124, function() { //'listening' listener

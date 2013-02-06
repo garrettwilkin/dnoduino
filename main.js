@@ -23,11 +23,18 @@ io.sockets.on('connection', function(socket) {
   });
 });
 
-var dServer = dnode({
-  basic : function (s,cb) {
-    cb(console.log(s));
-  }
+var net = require('net');
+var server = net.createServer(function(c) { //'connection' listener
+  console.log('server connected');
+  c.on('end', function() {
+    console.log('server disconnected');
+  });
+  c.write('hello\r\n');
+  c.pipe(c);
 });
-dServer.listen(5004);
+server.listen(8124, function() { //'listening' listener
+  console.log('server bound');
+});
+
 
 console.log('Server running at http://127.0.0.1:1337/');
